@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using contactii2.Data;
 using contactii2.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace contactii2.Controllers
 {
+    [Authorize]
     public class CategoriesController : Controller
     {
         private readonly ApplicationDbContext _context;

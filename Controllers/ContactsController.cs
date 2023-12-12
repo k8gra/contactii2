@@ -7,21 +7,36 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using contactii2.Data;
 using contactii2.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
+
 
 namespace contactii2.Controllers
 {
+    [Authorize] //need user logged in
     public class ContactsController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<IdentityUser> _userManager; //user
 
-        public ContactsController(ApplicationDbContext context)
+        public ContactsController(ApplicationDbContext context, UserManager<IdentityUser> userManager)
         {
             _context = context;
+            _userManager = userManager; //user
         }
+        private Task<IdentityUser?> GetCurrentUserAsync()
+        {
+            return _userManager.GetUserAsync(HttpContext.User);
+        }//user
 
         // GET: Contacts
         public async Task<IActionResult> Index()
         {
+            var user = await GetCurrentUserAsync();
+            if (user == null)
+            {
+                return NotFound();
+            } //user
             var applicationDbContext = _context.Contact.Include(c => c.Categorie);
             return View(await applicationDbContext.ToListAsync());
         }
@@ -29,7 +44,7 @@ namespace contactii2.Controllers
         // GET: Contacts/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null)
+            if (id == null || _context.Contact==null)
             {
                 return NotFound();
             }
@@ -59,8 +74,15 @@ namespace contactii2.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ContactID,Prenom,Nom,Addresse,Ville,Province,CodePostal,Telephone,Email,DateCreation,CategorieID,Username")] Contact contact)
         {
+            var user = await GetCurrentUserAsync();
+            if (user == null)
+            {
+                return NotFound();
+            }
             if (ModelState.IsValid)
             {
+                contact.Username = user.UserName;
+                contact.DateCreation = DateTime.Now;
                 _context.Add(contact);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
