@@ -63,7 +63,7 @@ namespace contactii2.Controllers
         // GET: Contacts/Create
         public IActionResult Create()
         {
-            ViewData["CategorieID"] = new SelectList(_context.Set<Categorie>(), "CategorieID", "CategorieID");
+            ViewData["CategorieID"] = new SelectList(_context.Set<Categorie>(), "CategorieID", "CategorieName");
             return View();
         }
 
@@ -87,7 +87,7 @@ namespace contactii2.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CategorieID"] = new SelectList(_context.Set<Categorie>(), "CategorieID", "CategorieID", contact.CategorieID);
+            ViewData["CategorieID"] = new SelectList(_context.Set<Categorie>(), "CategorieID", "CategorieName", contact.CategorieID);
             return View(contact);
         }
 
@@ -104,7 +104,7 @@ namespace contactii2.Controllers
             {
                 return NotFound();
             }
-            ViewData["CategorieID"] = new SelectList(_context.Set<Categorie>(), "CategorieID", "CategorieID", contact.CategorieID);
+            ViewData["CategorieID"] = new SelectList(_context.Set<Categorie>(), "CategorieID", "CategorieName", contact.CategorieID);
             return View(contact);
         }
 
@@ -140,7 +140,7 @@ namespace contactii2.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CategorieID"] = new SelectList(_context.Set<Categorie>(), "CategorieID", "CategorieID", contact.CategorieID);
+            ViewData["CategorieID"] = new SelectList(_context.Set<Categorie>(), "CategorieID", "CategorieName", contact.CategorieID);
             return View(contact);
         }
 

@@ -238,7 +238,7 @@ namespace contactii2.Data.Migrations
 
                     b.HasKey("CategorieID");
 
-                    b.ToTable("Categorie");
+                    b.ToTable("Categorie", (string)null);
                 });
 
             modelBuilder.Entity("contactii2.Models.Contact", b =>
@@ -295,7 +295,7 @@ namespace contactii2.Data.Migrations
 
                     b.HasIndex("CategorieID");
 
-                    b.ToTable("Contact");
+                    b.ToTable("Contact", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

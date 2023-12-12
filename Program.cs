@@ -1,6 +1,7 @@
 using contactii2.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using projetfinal.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,6 +28,15 @@ else
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
+
+//Seed Data
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    SeedData.Initialize(services); //categories
+    SeedData2.Initialize(services); //contacts
+}
+
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
