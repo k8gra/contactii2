@@ -3,93 +3,119 @@
 @{
     ViewData["Title"] = "Index";
 }
+@section CSS
+{
+    <link href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css" rel="stylesheet" />
+}
 
-<h1>Index</h1>
+@section Scripts
+{
+    @* datatables*@
+    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
+    @*Sort/filter/paginate*@
+    <script>
+        $('#contactTable').DataTable({
+            "columnDefs": [
+                {
+                    "orderable": false, "targets": -1
+                }
+            ],
+            "lengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]]
+                    ]
+        });
+
+    </script>
+}
+<h1>Contacts</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a class="edit btn btn-primary" asp-action="Create">Create New</a>
 </p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Prenom)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Nom)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Addresse)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Ville)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Province)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CodePostal)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Telephone)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Email)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DateCreation)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Username)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Categorie)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Prenom)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nom)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Addresse)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Ville)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Province)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CodePostal)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Telephone)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DateCreation)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Username)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Categorie.CategorieID)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.ContactID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ContactID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ContactID">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<div pb-3>
+    <table class="table nowrap table-responsive" id="contactTable">
+        <thead>
+            <tr>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model.Prenom)
+                </th>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model.Nom)
+                </th>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model.Addresse)
+                </th>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model.Ville)
+                </th>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model.Province)
+                </th>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model.CodePostal)
+                </th>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model.Telephone)
+                </th>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model.Email)
+                </th>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model.DateCreation)
+                </th>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model.Username)
+                </th>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model.Categorie)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Prenom)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nom)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Addresse)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Ville)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Province)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CodePostal)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Telephone)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DateCreation)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Username)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Categorie.CategorieName)
+                    </td>
+                    <td>
+                        <a class="edit btn btn-primary" asp-action="Edit" asp-route-id="@item.ContactID">Edit</a>
+                        <a class="details btn btn-primary" asp-action="Details" asp-route-id="@item.ContactID">Details</a>
+                        <a class="delete btn btn-primary" asp-action="Delete" asp-route-id="@item.ContactID">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

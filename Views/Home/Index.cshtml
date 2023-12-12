@@ -1,8 +1,116 @@
-﻿@{
+﻿@using contactii2.Models
+@model IEnumerable<contactii2.Models.Contact>
+@{
     ViewData["Title"] = "Home Page";
 }
 
+
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4">Welcome to contactii</h1>
+    <div class="container text-center">
+        <div class="row">
+            <div class="col intro">
+                <img src="~/media/contact-logo.png" style="width:150px" />
+            </div>
+            <div class="col intro">
+                Welcome to contactii, the place to store all your loved one's contact information safely. Get started by logging in!
+            </div>
+        </div>
+    </div>
 </div>
+
+<p>
+    <a class="edit btn btn-primary" asp-action="Create" asp-controller="Contacts">Create New</a>
+</p>
+@if (Model == null)
+{
+    <p>Vous n'avez pas de contacts</p>
+}
+else
+{
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Prenom)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nom)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Addresse)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ville)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Province)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CodePostal)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Telephone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateCreation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Username)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Categorie)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Prenom)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nom)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Addresse)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Ville)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Province)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CodePostal)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Telephone)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateCreation)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Username)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Categorie.CategorieID)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.ContactID">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.ContactID">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.ContactID">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+}

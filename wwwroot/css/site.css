@@ -20,3 +20,39 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+
+.intro {
+    font-size: 1.25rem;
+}
+
+/*les boutons ont un font en noir*/
+.btn {
+    color: black;
+}
+
+.edit {
+    background-color: auto; /*same*/
+    border-color:auto;
+}
+
+.details {
+    background-color: palegoldenrod; /*yellow*/
+    border-color: palegoldenrod;
+}
+
+.details:hover {
+    background-color: rgb(164, 156, 68); /*slightly darker*/
+    border-color: rgb(164,156,68);
+}
+
+
+.delete {
+    background-color: palevioletred; /*red*/
+    border-color: palevioletred;
+}
+
+.delete:hover {
+    background-color: rgb(135, 37, 37); /*slightly darker*/
+    border-color: rgb(135,37,37);
+}
