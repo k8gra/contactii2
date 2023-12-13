@@ -5,7 +5,9 @@
 }
 @section CSS
 {
+    @* datatables *@
     <link href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css" rel="stylesheet" />
+    <link href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.bootstrap5.min.css" rel="stylesheet" />"
 }
 
 @section Scripts
@@ -13,8 +15,12 @@
     @* datatables*@
     <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.5.0/js/responsive.bootstrap5.min.js"></script>
     @*Sort/filter/paginate*@
     <script>
+        //responsive datatables
+        DataTable.defaults.responsive = true;
         $('#contactTable').DataTable({
             "columnDefs": [
                 {
@@ -31,7 +37,7 @@
 <p>
     <a class="edit btn btn-primary" asp-action="Create">Create New</a>
 </p>
-<div pb-3>
+<div class="pb-3">
     <table class="table nowrap table-responsive" id="contactTable">
         <thead>
             <tr>

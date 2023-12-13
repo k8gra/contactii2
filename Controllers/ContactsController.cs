@@ -38,6 +38,8 @@ namespace contactii2.Controllers
                 return NotFound();
             } //user
             var applicationDbContext = _context.Contact.Include(c => c.Categorie).Where((f => f.Username == user.UserName));
+            var count = applicationDbContext.Count();
+            ViewData["count"] = count;
             return View(await applicationDbContext.ToListAsync());
         }
 

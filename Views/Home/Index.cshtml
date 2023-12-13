@@ -4,7 +4,6 @@
     ViewData["Title"] = "Home Page";
 }
 
-
 <div class="text-center">
     <h1 class="display-4">Welcome to contactii</h1>
     <div class="container text-center">
@@ -28,7 +27,8 @@
 }
 else
 {
-<table class="table">
+    <div class="pb-3">
+    <table class="table table-responsive">
     <thead>
         <tr>
             <th>
@@ -62,7 +62,7 @@ else
                 @Html.DisplayNameFor(model => model.Username)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Categorie)
+                @Html.DisplayNameFor(model => model.CategorieID)
             </th>
             <th></th>
         </tr>
@@ -102,15 +102,16 @@ else
                     @Html.DisplayFor(modelItem => item.Username)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Categorie.CategorieID)
+                    @Html.DisplayFor(modelItem => item.Categorie.CategorieName)
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.ContactID">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.ContactID">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.ContactID">Delete</a>
+                    <a class="btn btn-primary edit" asp-action="Edit" asp-route-id="@item.ContactID">Edit</a>
+                    <a class ="btn btn-primary details" asp-action="Details" asp-route-id="@item.ContactID">Details</a>
+                    <a class="btn btn-primary delete" asp-action="Delete" asp-route-id="@item.ContactID">Delete</a>
                 </td>
             </tr>
         }
     </tbody>
 </table>
+    </div>
 }
